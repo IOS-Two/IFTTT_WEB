@@ -100,8 +100,8 @@ div#button {
 		</div>
 		<div id="menu">
 			<ul>
-				<li><a href="#">新建任务</a></li>
-				<li><a href="#">查看任务</a></li>
+				<li><a href="/IFTTT/TaskManagement.jsp">新建任务</a></li>
+				<li><a href="/IFTTT/LookTaskInfo.jsp">查看任务</a></li>
 				<li><a href="#">修改任务</a></li>
 			</ul>
 		</div>
@@ -150,7 +150,7 @@ div#button {
 				</div>
 				<div id="That">
 					<h3>THAT:</h3>
-					<div id="WeiboThat" style="display: block">
+					<div id="WeiboThat" style="display: none">
 						微博账户：<input type="text" name="weiboid" id="weiboid"><br>
 						微博密码：<input type="password" name="weibopassword"
 							id="weibopassword"><br> 微博内容:
@@ -159,7 +159,10 @@ div#button {
 						</textarea>
 						<br>
 					</div>
-					<div id="MailThat" style="display: none">
+					<div id="MailThat" style="display: block">
+						邮件用户:<br>
+						<input type="text" name="MailId" id="MailId"><br>
+						密码：<input type="password" name="Mailpass" id="Mailpass"><br>
 						收件人：<input type="text" name="Mailrec" id="Mailrec"><br>
 						主题：<br> <input type="text" name="Mailsub" id="Mailsub"><br>
 						微博内容:

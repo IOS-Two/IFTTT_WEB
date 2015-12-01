@@ -8,11 +8,14 @@ public class WeiboContentTrigger extends Trigger{
 		// TODO Auto-generated constructor stub
 		this.WeiboId = WeiboId;
 		this.pattern = pattern;
+		this.type = weiboContentTrigger;
 	}
 	@Override
 	public String getInfo() {
 		// TODO Auto-generated method stub
-		return null;
+		String Info = "ListenedWeiboID:" + WeiboId + "\n"
+				+ "pattern:" + pattern + "\n";
+		return Info;
 	}
 
 	@Override

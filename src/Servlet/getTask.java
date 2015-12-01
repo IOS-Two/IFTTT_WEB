@@ -8,9 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Action.Action;
+import Action.MailAction;
+import Action.TaskOperation;
+import Action.WeiboAction;
 import Database.DatabaseAccount;
+import Trigger.MailTrigger;
+import Trigger.TimeTrigger;
 import Trigger.Trigger;
+import Trigger.WeiboContentTrigger;
+import Trigger.WeiboTimeTrigger;
 import model.Account;
+import model.Task;
 
 /**
  * Servlet implementation class getTask
@@ -52,9 +61,10 @@ public class getTask extends HttpServlet {
 		Account account = DatabaseAccount.search(temp);
 		int thistype = Integer.parseInt((String) request.getParameter("this"));
 		int thattype = Integer.parseInt((String) request.getParameter("that"));
-		System.out.println(thistype + " " + thattype);
-		getTrigger(request, thistype);
-		doGet(request, response);
+		Task task = getTaskInfo(request, thistype, thattype, username);
+		System.out.println(task.getInfo());
+		TaskOperation.addTask(task);
+		// doGet(request, response);
 	}
 
 	protected Trigger getTrigger(HttpServletRequest request, int thistype) {
@@ -62,25 +72,50 @@ public class getTask extends HttpServlet {
 		if (thistype == 0) {
 			String Date = request.getParameter("Date");
 			String Time = request.getParameter("Time");
-			System.out.println(Date);
-			System.out.println(Time);
+			trigger = new TimeTrigger(Date, Time);
 		} else if (thistype == 1) {
 			String MailID = request.getParameter("MailId1");
 			String Mailpass = request.getParameter("MailPass1");
-			System.out.println(MailID);
-			System.out.println(Mailpass);
+			trigger = new MailTrigger(MailID, Mailpass);
 		} else if (thistype == 2) {
 			String WeiboId = request.getParameter("WeiboId1");
 			String WeiboPattern = request.getParameter("weiboPattern");
-			System.out.println(WeiboId);
-			System.out.println(WeiboPattern);
+			trigger = new WeiboContentTrigger(WeiboId, WeiboPattern);
 		} else {
 			String WeiboId = request.getParameter("WeiboId2");
 			String during = request.getParameter("during");
-			System.out.println(WeiboId);
-			System.out.println(during);
+			trigger = new WeiboTimeTrigger(WeiboId, during);
 		}
 		return trigger;
 	}
 
+	protected Action getAction(HttpServletRequest request, int thattype) {
+		Action action = null;
+		if (thattype == 0) {
+			String WeiboID = request.getParameter("weiboid");
+			String weibopassword = request.getParameter("weibopassword");
+			String weiboContent = request.getParameter("weibocontent");
+			action = new WeiboAction(WeiboID, weibopassword, weiboContent);
+		} else {
+			String MailId = request.getParameter("MailId");
+			String MailPass = request.getParameter("Mailpass");
+			String MailRec = request.getParameter("Mailrec");
+			String Mailsub = request.getParameter("Mailsub");
+			String MailContent = request.getParameter("Mailcontent");
+			action = new MailAction(MailId, MailPass, MailRec, MailContent, Mailsub);
+		}
+		return action;
+	}
+	
+	protected Task getTaskInfo(HttpServletRequest request, int thistype, int thattype,
+			String username) {
+		String taskName = request.getParameter("taskname");
+		Task task = new Task(0, username, taskName);
+		task.setThistype(thistype);
+		task.setThattype(thattype);
+		task.setAction(getAction(request, thattype));
+		task.setTrigger(getTrigger(request, thistype));
+		task.setTid(task.hashCode());
+		return task;
+	}
 }

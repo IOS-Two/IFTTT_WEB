@@ -8,11 +8,14 @@ public class WeiboTimeTrigger extends Trigger{
 		// TODO Auto-generated constructor stub
 		this.during = during;
 		this.WeiboId = WeiboId;
+		this.type = weiboTimeTrigger;
 	}
 	@Override
 	public String getInfo() {
 		// TODO Auto-generated method stub
-		return null;
+		String Info = "ListenedWeiboID" + WeiboId + "\n"
+				+ "During:" + during + "\n";
+		return Info;
 	}
 
 	@Override

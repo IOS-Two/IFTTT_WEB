@@ -7,8 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="container"
-		style="position: relitive; top: 10px; left: 500px;">
+	<div id="container">
 		<form action="Login" method="post">
 			<h1>登陆</h1>
 			<br> username: <input id="username" name="username" type="text">

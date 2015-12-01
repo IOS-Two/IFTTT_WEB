@@ -4,25 +4,29 @@ import java.util.ArrayList;
 import model.Task;
 
 public class TaskOperation {
-	private static ArrayList<Task> taskList = new ArrayList<Task>();
+	public static ArrayList<Task> taskList = new ArrayList<Task>();
 	
-	public void deleteTask() {
+	public static void deleteTask() {
 		
 	}
 	
-	public void pauseTask() {
+	public static void pauseTask() {
 		
 	}
 	
-	public void addTask() {
+	public static void addTask(Task task) {
+		taskList.add(task);
+	}
+	
+	public static void runTask() {
 		
 	}
 	
-	public void runTask() {
+	public static void getTask() {
 		
 	}
 	
-	public void getTask() {
-		
+	public static int size() {
+		return taskList.size();
 	}
 }

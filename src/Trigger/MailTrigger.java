@@ -9,12 +9,15 @@ public class MailTrigger extends Trigger {
 		// TODO Auto-generated constructor stub
 		this.MailId = MailId;
 		this.MailPassword = MailPassword;
+		this.type = mailTrigger;
 	}
 
 	@Override
 	public String getInfo() {
 		// TODO Auto-generated method stub
-		return null;
+		String Info = "ListenedMailID:" + MailId + "\n"
+				+ "password:" + MailPassword + "\n";
+		return Info;
 	}
 
 	@Override

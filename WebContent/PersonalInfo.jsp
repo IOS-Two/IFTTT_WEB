@@ -10,12 +10,12 @@
 <body>
 	<h1>个人信息</h1>
 	<%
-	HttpSession session2 = request.getSession();
-	String username = (String)session2.getAttribute("username");
-	String password = (String)session2.getAttribute("password");
-	Account a = DatabaseAccount.search(new Account(username, password));
-	int money = a.getMoney();
-	int level = a.getLevel();
+		HttpSession session2 = request.getSession();
+		String username = (String)session2.getAttribute("username");
+		String password = (String)session2.getAttribute("password");
+		Account a = DatabaseAccount.search(new Account(username, password));
+		int money = a.getMoney();
+		int level = a.getLevel();
 	%>
 	<!-- form action="modifyPersonalInfo" method = "post" -->
 	username:<input id="username" name="username" type="text" value = <%=username %>><br>

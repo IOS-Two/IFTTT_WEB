@@ -4,17 +4,21 @@ import java.util.Date;
 
 public class TimeTrigger extends Trigger{
 
-	Date time;
-	public TimeTrigger(Date time) {
+	private Date time;
+	private String time1;
+	private String date;
+	public TimeTrigger(String Date, String Time) {
 		// TODO Auto-generated constructor stub
 		this.type = timeTrigger;
-		this.time = time;
+		this.date = Date;
+		this.time1 = Time;
 	}
 	@Override
 	public String getInfo() {
 		// TODO Auto-generated method stub
-		
-		return null;
+		String Info = "ListenedDate:" + date + "\n"
+				+ "Time:" + time1 + "\n";
+		return Info;
 	}
 
 	@Override

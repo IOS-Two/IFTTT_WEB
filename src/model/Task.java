@@ -5,7 +5,7 @@ import Action.Action;
 
 public class Task implements Runnable{
 	
-	private String tid;
+	private int tid;
 	private String username;
 	private String taskName;
 	private int status;
@@ -28,11 +28,27 @@ public class Task implements Runnable{
 	private static final int weiboContentTrigger = 2;
 	private static final int weiboTimeTrigger = 3;
 
-	public String getTid() {
+	public Task(int tid, String username, String taskname) {
+		// TODO Auto-generated constructor stub
+		this.tid = tid;
+		this.username = username;
+		this.taskName = taskname;
+		this.status = INIT;
+	}
+	
+    public String getInfo () {
+    	String Info = "Taskname:" + taskName + "\n"
+    			+ "user:" + username + "\n"
+    			+ "status:" + status + "\n"
+    			+ trigger.getInfo() + action.getInfo();
+    	return Info;
+    }
+	
+	public int getTid() {
 		return tid;
 	}
 
-	public void setTid(String tid) {
+	public void setTid(int tid) {
 		this.tid = tid;
 	}
 
