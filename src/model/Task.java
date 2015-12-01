@@ -13,6 +13,16 @@ public class Task implements Runnable{
 	private Trigger trigger;
 	private int thistype;
 	private int thattype;
+	private String thatId;
+	private String thatPass;
+	private String thatContent;
+	private String thatRec;
+	private String thatSub;
+	private String thisDate;
+	private String thisTime;
+	private String thisDuring;
+	private String thisId;
+	private String thisPass;
 	
 	private static final int INIT = -1;
 	private static final int RUNNING = 1;
@@ -117,6 +127,86 @@ public class Task implements Runnable{
 			if (trigger.THIS())
 				action.THAT();
 		}
+	}
+
+	public String getThatId() {
+		return thatId;
+	}
+
+	public void setThatId(String thatId) {
+		this.thatId = thatId;
+	}
+
+	public String getThatPass() {
+		return thatPass;
+	}
+
+	public void setThatPass(String thatPass) {
+		this.thatPass = thatPass;
+	}
+
+	public String getThatContent() {
+		return thatContent;
+	}
+
+	public void setThatContent(String thatContent) {
+		this.thatContent = thatContent;
+	}
+
+	public String getThatRec() {
+		return thatRec;
+	}
+
+	public void setThatRec(String thatRec) {
+		this.thatRec = thatRec;
+	}
+
+	public String getThatSub() {
+		return thatSub;
+	}
+
+	public void setThatSub(String thatSub) {
+		this.thatSub = thatSub;
+	}
+
+	public String getThisDate() {
+		return thisDate;
+	}
+
+	public void setThisDate(String thisDate) {
+		this.thisDate = thisDate;
+	}
+
+	public String getThisTime() {
+		return thisTime;
+	}
+
+	public void setThisTime(String thisTime) {
+		this.thisTime = thisTime;
+	}
+
+	public String getThisDuring() {
+		return thisDuring;
+	}
+
+	public void setThisDuring(String thisDuring) {
+		this.thisDuring = thisDuring;
+	}
+
+	public String getThisId() {
+		return thisId;
+	}
+
+	public void setThisId(String thisId) {
+		this.thisId = thisId;
+	}
+
+	public String getThisPass() {
+		return thisPass;
+	}
+
+	public void setThisPass(String thisPass) {
+		this.thisPass = thisPass;
 	}
 
 }
