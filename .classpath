@@ -19,5 +19,6 @@
 	<classpathentry kind="lib" path="/Users/jiangchenzhou/Downloads/weibo4j-oauth2-beta3.1.1-master/weibo4j-oauth2/lib/commons-logging-1.1.jar"/>
 	<classpathentry kind="lib" path="/Users/jiangchenzhou/Downloads/weibo4j-oauth2-beta3.1.1-master/weibo4j-oauth2/lib/jackson-all-1.8.5.jar"/>
 	<classpathentry kind="lib" path="/Users/jiangchenzhou/Downloads/weibo4j-oauth2-beta3.1.1-master/weibo4j-oauth2/lib/log4j-1.2.16.jar"/>
+	<classpathentry kind="lib" path="/Users/jiangchenzhou/Desktop/weibo.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

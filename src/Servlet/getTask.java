@@ -62,6 +62,7 @@ public class getTask extends HttpServlet {
 		int thistype = Integer.parseInt((String) request.getParameter("this"));
 		int thattype = Integer.parseInt((String) request.getParameter("that"));
 		Task task = getTaskInfo(request, thistype, thattype, username);
+		System.out.println(task.hashCode());
 		System.out.println(task.getInfo());
 		TaskOperation.addTask(task);
 		// doGet(request, response);
