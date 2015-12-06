@@ -57,7 +57,12 @@ public class getTask extends HttpServlet {
 		String username = (String) session1.getAttribute("username");
 		String password = (String) session1.getAttribute("password");
 		System.out.println(username + " " + password);
-		Account temp = new Account(username, password);
+		/*
+		 * TODO:这里的account应该与数据库建立联系
+		 * 没有将邮箱地址传入此时的account
+		 * 实现方法有待讨论
+		 */
+		Account temp = new Account(username, password,"");
 		Account account = DatabaseAccount.search(temp);
 		int thistype = Integer.parseInt((String) request.getParameter("this"));
 		int thattype = Integer.parseInt((String) request.getParameter("that"));

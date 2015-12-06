@@ -39,7 +39,13 @@ public class Login extends HttpServlet {
 		String password = request.getParameter("password");
 		session.setAttribute("username", username);
 		session.setAttribute("password", password);
-		Account account = new Account(username, password);
+		System.out.println(username+" "+password);
+		/*
+		 * TODO:这里的account应该与数据库建立联系
+		 * 没有将邮箱地址传入此时的account
+		 * 实现方法有待讨论
+		 */
+		Account account = new Account(username, password,"");
 		if (DatabaseAccount.search(account) != null) {
 			response.sendRedirect("/IFTTT/PersonalHome.jsp");;
 		} else

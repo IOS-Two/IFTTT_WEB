@@ -3,18 +3,42 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<title>Insert title here</title>
+<title>IFTTT Login</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- meta name="viewport" content="width=device-width,initial-scale=1.0" 解释
+ <meta name="viewport" content="width=device-width,initial-scale=1.0">
+ content属性值 :
+     width:可视区域的宽度，值可为数字或关键词device-width
+     height:同width
+     intial-scale:页面首次被显示是可视区域的缩放级别，取值1.0则页面按实际尺寸显示，无任何缩放
+     maximum-scale=1.0, minimum-scale=1.0;可视区域的缩放级别，
+     maximum-scale用户可将页面放大的程序，1.0将禁止用户放大到实际尺寸之上。
+     user-scalable:是否可对页面进行缩放，no 禁止缩放 -->
+<link href="css/loginStyle.css" rel='stylesheet' type='text/css' />
 </head>
 <body>
-	<div id="container">
+	<!--start-main-->
+	<h1>Please login here！</h1>
+	<div class="login-box">
 		<form action="Login" method="post">
-			<h1>登陆</h1>
-			<br> username: <input id="username" name="username" type="text">
-			<br> password: <input id="password" name="password"
-				type="password"> <br> <input type="submit" value="登录">
-			<input type="reset" value="取消">
+			<input id="username" name="username" type="text" class="text"
+				value="Username" onfocus="this.value = '';"
+				onblur="if (this.value == '') {this.value = 'Username';}">
+			<input
+				id="password" name="password" type="password" value="Password"
+				onfocus="this.value = '';"
+				onblur="if (this.value == '') {this.value = 'Password';}">
+			<div class="clear"></div>
+			<div class="btn">
+				<input type="submit" value="Login"> <input type="reset"
+					value="Cancel">
+			</div>
+			<div class="clear"></div>
 		</form>
+		<div class="remember">
+			<a href="#">Remember me</a>
+		</div>
 	</div>
+	<!--//End-login-form-->
 </body>
 </html>

@@ -3,16 +3,42 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
-<title>Insert title here</title>
+<title>IFTTT Register</title>
+<link href="css/registerStyle.css" rel='stylesheet' type='text/css' />
+<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-	<form action="register" method= "post">
-		<h1>注册</h1>
-		<br> username: <input id="username" name="username" type="text">
-		<br> password: <input id="password" name="password" type="password"> <br> 
-		<input type="submit" value="注册">
-		<input type="reset" value="取消">
-	</form>
+	<div class="main">
+		<div class="title-head">
+			<h1>Create your account here</h1>
+		</div>
+		<div class="Regisration">
+			<div class="Regisration-head">
+				<h2>
+					<span></span>Register
+				</h2>
+			</div>
+			<form action="register" method="post">
+				<input id="emailid" name="email" type="text" value="Email Address"
+					onfocus="this.value = '';"
+					onblur="if (this.value == '') {this.value = 'Email Address';}">
+				<input id="username" name="username" type="text" value="Username"
+					onfocus="this.value = '';"
+					onblur="if (this.value == '') {this.value = 'Username';}">
+				<h3>Input your password</h3>
+				<input id="password" name="password" type="password"
+					value="Password" onfocus="this.value = '';"
+					onblur="if (this.value == '') {this.value = 'Password';}">
+				<h3>Confirm your password</h3>
+				<input id="password2" name="password2" type="password"
+					value="Password" onfocus="this.value = '';"
+					onblur="if (this.value == '') {this.value = 'Password';}">
+				<div class="submit">
+					<input type="submit" value="Sign Me Up">
+				</div>
+				<div class="clear"></div>
+			</form>
+		</div>
+	</div>
 </body>
 </html>

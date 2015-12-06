@@ -5,17 +5,22 @@ import model.Account;
 import java.sql.*;
 
 public class DatabaseAccount {
-	
-	public static void insert(Account account) {
-		
-		try {
 
+	public static void insert(Account account) {
+
+		try {
+			/*
+			 * TODO:userid在数据库中需有一个全局变量,money和level初值10和1 这里先使用一个固定值来完成初步功能
+			 */
 			java.sql.Connection connect = DatabaseCommon.connect();
 			System.out.println("Success connect Mysql server!");
 			Statement stmt = connect.createStatement();
 			String username = account.getUsername();
 			String password = account.getPassword();
-			String r1 = "insert into Account values('" + username + "' " + "," + "'" + password + "'" + ");";
+			String email = account.getEmailaddress();
+			String r1 = "insert into Account values(1003,'" + username + "' " + "," + "'" + password + "'" + ",'"
+					+ email + "'" + ",10,1);";
+			System.out.println(r1);
 			stmt.execute(r1);
 			stmt.close();
 			connect.close();
@@ -29,20 +34,21 @@ public class DatabaseAccount {
 	}
 
 	public static Account search(Account account) {
-		try {  
+		try {
 			java.sql.Connection connect = DatabaseCommon.connect();
 			System.out.println("Success connect Mysql server!");
 			String username = "'" + account.getUsername() + "'";
 			String password = "'" + account.getPassword() + "'";
+			String email = "'" + account.getEmailaddress() + "'";
 			String Squery = "select * from Account where username = " + username + " and " + "passwords = " + password
 					+ ";";
 			PreparedStatement pstmt;
-			pstmt = (PreparedStatement)connect.prepareStatement(Squery);
+			pstmt = (PreparedStatement) connect.prepareStatement(Squery);
 			ResultSet rs = pstmt.executeQuery();
 			int num = 0;
 			while (rs.next()) {
-	            num++;
-	        }
+				num++;
+			}
 			System.out.println(num);
 			if (num == 0) {
 				System.out.println("False");
@@ -52,8 +58,8 @@ public class DatabaseAccount {
 			}
 			pstmt.close();
 			connect.close();
-			
-			return new Account(username, password);
+
+			return new Account(username, password, email);
 
 		} catch (Exception e) {
 
@@ -63,21 +69,21 @@ public class DatabaseAccount {
 
 		}
 	}
-	
+
 	public static Account searchByName(Account account) {
-		try {  
+		try {
 			java.sql.Connection connect = DatabaseCommon.connect();
 			System.out.println("Success connect Mysql server!");
 			String username = "'" + account.getUsername() + "'";
-			String Squery = "select * from Account where username = " + username
-					+ ";";
+			String email = "'" + account.getEmailaddress() + "'";
+			String Squery = "select * from Account where username = " + username + ";";
 			PreparedStatement pstmt;
-			pstmt = (PreparedStatement)connect.prepareStatement(Squery);
+			pstmt = (PreparedStatement) connect.prepareStatement(Squery);
 			ResultSet rs = pstmt.executeQuery();
 			int num = 0;
 			while (rs.next()) {
-	            num++;
-	        }
+				num++;
+			}
 			System.out.println(num);
 			if (num == 0) {
 				System.out.println("False");
@@ -87,8 +93,8 @@ public class DatabaseAccount {
 			}
 			pstmt.close();
 			connect.close();
-			
-			return new Account(username, "");
+
+			return new Account(username, "", email);
 
 		} catch (Exception e) {
 
@@ -98,5 +104,5 @@ public class DatabaseAccount {
 
 		}
 	}
-	
+
 }

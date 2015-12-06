@@ -3,13 +3,14 @@ package model;
 public class Account {
 	private String username;
 	private String password;
+	String emailaddress;
 	private int money = 1000;
 	private int level = 0;
 
-	
-	public Account(String username, String password) {
+	public Account(String username, String password,String email) {
 		this.setUsername(username);
 		this.setPassword(password);
+		this.setEmailaddress(email);
 	}
 
 	public String getUsername() {
@@ -26,6 +27,14 @@ public class Account {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getEmailaddress() {
+		return emailaddress;
+	}
+
+	public void setEmailaddress(String emailaddress) {
+		this.emailaddress = emailaddress;
 	}
 
 	public int getLevel() {

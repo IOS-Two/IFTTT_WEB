@@ -35,14 +35,21 @@ public class register extends HttpServlet {
 		// TODO Auto-generated method stub
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		Account account = new Account(username, password);
-
-		if (DatabaseAccount.searchByName(account) != null) {
-			System.out.println("This username has been used!");
-			response.getWriter().append(username + " has been used!");
+		String password2 = request.getParameter("password2");
+		String email = request.getParameter("email");
+		if (!password2.equals(password)) {
+			System.err.println("The two passwords are not same");
+			response.getWriter().append("The two passwords are not same!");
 		} else {
-			DatabaseAccount.insert(account);
-			response.sendRedirect("login.jsp");
+			Account account = new Account(username, password, email);
+
+			if (DatabaseAccount.searchByName(account) != null) {
+				System.out.println("This username has been used!");
+				response.getWriter().append(username + " has been used!");
+			} else {
+				DatabaseAccount.insert(account);
+				response.sendRedirect("login.jsp");
+			}
 		}
 	}
 
