@@ -1,10 +1,11 @@
 package Trigger;
 
+import java.util.Calendar;
 import java.util.Date;
 
 public class TimeTrigger extends Trigger{
 
-	private Date time;
+	private Calendar time;
 	private String time1;
 	private String date;
 	public TimeTrigger(String Date, String Time) {
@@ -12,6 +13,16 @@ public class TimeTrigger extends Trigger{
 		this.type = timeTrigger;
 		this.date = Date;
 		this.time1 = Time;
+		String[] dataDivide = date.split("-");
+		String[] timeDicide = time1.split(":");
+		int year = Integer.parseInt(dataDivide[0]);
+		int month = Integer.parseInt(dataDivide[1]);
+		int day = Integer.parseInt(dataDivide[2]);
+		int hour = Integer.parseInt(timeDicide[0]);
+		int minute = Integer.parseInt(timeDicide[1]);
+		int second = Integer.parseInt(timeDicide[2]);
+		this.time.set(year, month - 1, day, hour, minute, second);
+		
 	}
 	@Override
 	public String getInfo() {
@@ -25,7 +36,8 @@ public class TimeTrigger extends Trigger{
 	public boolean THIS() {
 		// TODO Auto-generated method stub
 		Date now = new Date();
-		if (now.compareTo(time) >= 0) {
+		Date time1 = this.time.getTime();
+		if (now.compareTo(time1) >= 0) {
 			return true;
 		}
 		return false;

@@ -1,4 +1,14 @@
 package Action;
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.Message.RecipientType;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 
 public class MailAction extends Action {
 	private String MailId;
@@ -29,9 +39,31 @@ public class MailAction extends Action {
 	}
 
 	@Override
-	public void THAT() {
+	public void THAT() throws MessagingException {
 		// TODO Auto-generated method stub
-
+		Properties props = new Properties();
+		props.put("mail.smtp.auth", "true");			//…Ë÷√–Ë“™»œ÷§
+		props.put("mail.smtp.host", "smtp.qq.com");		//…Ë÷√smtp–≠“È∫Õ∑˛ŒÒ∆˜
+		props.put("mail.user", MailId);			//…Ë÷√”√ªß
+		props.put("mail.password", Mailpass);	//…Ë÷√√‹¬Î
+		Authenticator authenticator = new Authenticator() {
+			@Override
+			protected PasswordAuthentication getPasswordAuthentication() {		//»œ÷§
+				String userName = props.getProperty("mail.user");
+				String password = props.getProperty("mail.password");
+				return new PasswordAuthentication(userName, password);
+			}
+		};
+		Session mailSession = Session.getInstance(props, authenticator);	//–¬Ω®ª·ª∞
+		MimeMessage message = new MimeMessage(mailSession);			//–¬Ω®” º˛
+		InternetAddress form;
+		form = new InternetAddress(props.getProperty("mail.user"));
+		message.setFrom(form);
+		InternetAddress to = new InternetAddress(Mailrec);	
+		message.setRecipient(RecipientType.TO, to);		//…Ë÷√∑¢ÀÕ»À
+		message.setSubject(Mailsub);	//…Ë÷√÷˜Ã‚
+		message.setContent(Mailcontent, "text/html;charset=UTF-8");		//…Ë÷√ƒ⁄»›
+		Transport.send(message);	//∑¢ÀÕ±®∏Ê
 	}
 
 }

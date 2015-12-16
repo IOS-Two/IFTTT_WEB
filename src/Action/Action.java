@@ -1,5 +1,7 @@
 package Action;
 
+import javax.mail.MessagingException;
+
 public abstract class Action {
 	protected int type;
 	protected static final int sendWeibo = 0;
@@ -14,5 +16,5 @@ public abstract class Action {
 	}
 	
 	public abstract String getInfo();
-	public abstract void THAT();
+	public abstract void THAT() throws MessagingException;
 }
