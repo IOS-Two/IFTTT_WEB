@@ -13,7 +13,7 @@
 		HttpSession session2 = request.getSession();
 		String username = (String)session2.getAttribute("username");
 		String password = (String)session2.getAttribute("password");
-		Account a = DatabaseAccount.search(new Account(username, password));
+		Account a = DatabaseAccount.search(new Account(username, password,""));
 		int money = a.getMoney();
 		int level = a.getLevel();
 	%>
