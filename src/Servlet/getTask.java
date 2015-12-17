@@ -66,9 +66,8 @@ public class getTask extends HttpServlet {
 		Task task = getTaskInfo(request, thistype, thattype, username);
 		System.out.println(task.hashCode());
 		System.out.println(task.getInfo());
-		Thread thread = new Thread(task);
-		System.out.println(task.getTaskName() + " BEGIN!");
-		thread.start();
+		TaskOperation.addTask(task);
+		
 		doGet(request, response);
 	}
 

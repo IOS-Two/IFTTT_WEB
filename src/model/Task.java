@@ -139,7 +139,16 @@ public class Task implements Runnable {
 					e.printStackTrace();
 				}
 			}
+			else if (status == PAUSE) {
+				try {
+					Thread.sleep(1000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else if (status == STOP)
+				break;
 		}
 	}
-
 }
