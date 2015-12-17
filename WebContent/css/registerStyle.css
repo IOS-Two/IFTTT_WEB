@@ -85,7 +85,7 @@ img {
 }
 /*end reset*/
 body {
-	background: url(../images/scenelogin.jpg) no-repeat center fixed;
+	background: url(../images/scene2.jpg) no-repeat center fixed;
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
 	-o-background-size: cover;
@@ -114,6 +114,7 @@ h1 {
 	color: #ffffff;
 	font-weight: 300;
 	font-size: 3em;
+	font-family: "Microsoft YaHei", 微软雅黑, 华文细黑
 }
 
 .Login {
@@ -177,7 +178,7 @@ h1 {
 	font-size: 33px;
 	font-weight: 700;
 	margin-left: 20px;
-	font-family: 'Raleway', sans-serif;
+	font-family: "Microsoft YaHei", 微软雅黑, 华文细黑
 }
 
 .Regisration form {
@@ -185,12 +186,13 @@ h1 {
 	margin: 5% 0%;
 	position: relative;
 }
-.Regisration form h3{
+
+.Regisration form h3 {
 	text-align: center;
 	color: #080808;
 	font-size: 16px;
 	font-weight: 700;
-	font-family: 'Raleway', sans-serif;
+	font-family: "Microsoft YaHei", 微软雅黑, 华文细黑
 }
 
 .Regisration form input[type="text"], .Regisration form input[type="password"]
@@ -215,7 +217,7 @@ h1 {
 	-webkit-box-shadow: inset 0px 3px 0px 0px rgba(5, 5, 5, 0.15);
 	-o-box-shadow: inset 0px 3px 0px 0px rgba(5, 5, 5, 0.15);
 	-moz-box-shadow: inset 0px 3px 0px 0px rgba(5, 5, 5, 0.15);
-	font-family: 'Raleway', sans-serif;
+	font-family: "Microsoft YaHei", 微软雅黑, 华文细黑
 }
 
 .Regisration form input[type="text"]:hover, .Regisration form input[type="password"]:hover
@@ -238,8 +240,7 @@ h1 {
 	border: none;
 	font-weight: 900;
 	outline: none;
-	font-family: 'Raleway', sans-serif;
-	padding: 14px 0px;
+	font-family: "Microsoft YaHei", 微软雅黑, 华文细黑 padding : 14px 0px;
 	width: 35%;
 	font-size: 18px;
 	transition: border-color 0.3s;

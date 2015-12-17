@@ -53,16 +53,13 @@ public class getTask extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session1 = request.getSession();
 		String username = (String) session1.getAttribute("username");
 		String password = (String) session1.getAttribute("password");
 		System.out.println(username + " " + password);
-		/*
-		 * TODO:这里的account应该与数据库建立联系
-		 * 没有将邮箱地址传入此时的account
-		 * 实现方法有待讨论
-		 */
-		Account temp = new Account(username, password,"");
+
+		Account temp = new Account(username, password, "");
 		Account account = DatabaseAccount.search(temp);
 		int thistype = Integer.parseInt((String) request.getParameter("this"));
 		int thattype = Integer.parseInt((String) request.getParameter("that"));
@@ -70,7 +67,8 @@ public class getTask extends HttpServlet {
 		System.out.println(task.hashCode());
 		System.out.println(task.getInfo());
 		TaskOperation.addTask(task);
-		// doGet(request, response);
+
+		doGet(request, response);
 	}
 
 	protected Trigger getTrigger(HttpServletRequest request, int thistype) {
@@ -112,9 +110,8 @@ public class getTask extends HttpServlet {
 		}
 		return action;
 	}
-	
-	protected Task getTaskInfo(HttpServletRequest request, int thistype, int thattype,
-			String username) {
+
+	protected Task getTaskInfo(HttpServletRequest request, int thistype, int thattype, String username) {
 		String taskName = request.getParameter("taskname");
 		Task task = new Task(0, username, taskName);
 		task.setThistype(thistype);

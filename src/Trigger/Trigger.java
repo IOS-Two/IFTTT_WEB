@@ -1,5 +1,7 @@
 package Trigger;
 
+import java.io.IOException;
+
 public abstract class Trigger {
 	protected int type;
 	protected static final int timeTrigger = 0;
@@ -16,5 +18,5 @@ public abstract class Trigger {
 	}
 	
 	public abstract String getInfo();
-	public abstract boolean THIS();
+	public abstract boolean THIS() throws IOException;
 }

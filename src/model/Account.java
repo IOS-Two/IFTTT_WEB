@@ -1,16 +1,25 @@
 package model;
 
 public class Account {
+	private int userid;
 	private String username;
 	private String password;
 	String emailaddress;
 	private int money = 1000;
 	private int level = 0;
 
-	public Account(String username, String password,String email) {
+	public Account(String username, String password, String email) {
 		this.setUsername(username);
 		this.setPassword(password);
 		this.setEmailaddress(email);
+	}
+
+	public int getUserid() {
+		return userid;
+	}
+
+	public void setUserid(int userid) {
+		this.userid = userid;
 	}
 
 	public String getUsername() {

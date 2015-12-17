@@ -82,10 +82,9 @@ nav.horizontal ul li {
 img {
 	max-width: 100%;
 }
-/*end reset*/
 /****-----start-body----****/
 body {
-	background: url(../images/scenelogin.jpg) no-repeat center fixed;
+	background: url(../images/scene2.jpg) no-repeat center fixed;
 	font-family: 'Roboto', sans-serif;
 	background-size: cover;
 	-webkit-background-size: cover;
@@ -99,6 +98,7 @@ h1 {
 	font-weight: 300;
 	font-size: 3em;
 	padding-top: 2em;
+	font-family: "Microsoft YaHei",微软雅黑,华文细黑 
 }
 
 .login-box {
@@ -107,17 +107,7 @@ h1 {
 	height: 180px;
 	padding: 2.4em;
 	margin: 4em auto 0 auto;
-}
-
-form li {
-	list-style: none;
-	margin-bottom: 25px;
-	width: 100%;
-	background: #b73338;
-	border-radius: 0.3em;
-	-webkit-border-radius: 0.3em;
-	-o-border-radius: 0.3em;
-	-moz-border-radius: 0.3em;
+	font-family: "Microsoft YaHei",微软雅黑,华文细黑 
 }
 
 input[type="text"] {
@@ -131,6 +121,7 @@ input[type="text"] {
 	font-weight: 100;
 	margin: 5px 0px 0px 63px;
 	background: none;
+	font-family: "Microsoft YaHei",微软雅黑,华文细黑 
 }
 
 input[type="password"] {
@@ -144,6 +135,7 @@ input[type="password"] {
 	margin: 65px 0px 0px 120px;
 	background: none;
 	font-weight: 100;
+	font-family: "Microsoft YaHei",微软雅黑,华文细黑 
 }
 
 .btn {
@@ -206,6 +198,7 @@ input[type="reset"]:hover {
 	font-weight: 100;
 	font-size: 14px;
 	float: left;
+	font-family: "Microsoft YaHei",微软雅黑,华文细黑 
 }
 /*--start-responsive-design--*/
 @media ( max-width :1024px) {
