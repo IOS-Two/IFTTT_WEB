@@ -9,11 +9,9 @@ public class DatabaseAccount {
 	public static void insert(Account account) {
 
 		try {
-			/*
-			 * TODO:userid在数据库中需有一个全局变量,money和level初值10和1 这里先使用一个固定值来完成初步功能
-			 */
+			
 			java.sql.Connection connect = DatabaseCommon.connect();
-			System.out.println("Success connect Mysql server!");
+			System.out.println("from insert Success connect Mysql server!");
 			Statement stmt = connect.createStatement();
 			String username = account.getUsername();
 			String password = account.getPassword();
@@ -27,7 +25,7 @@ public class DatabaseAccount {
 
 		} catch (Exception e) {
 
-			System.out.print("get data error!");
+			System.out.print("from insert get data error!");
 			e.printStackTrace();
 
 		}
@@ -36,7 +34,7 @@ public class DatabaseAccount {
 	public static Account search(Account account) {
 		try {
 			java.sql.Connection connect = DatabaseCommon.connect();
-			System.out.println("Success connect Mysql server!");
+			System.out.println("from search Success connect Mysql server!");
 			String username = "'" + account.getUsername() + "'";
 			String password = "'" + account.getPassword() + "'";
 			String email = "'" + account.getEmailaddress() + "'";
@@ -63,7 +61,7 @@ public class DatabaseAccount {
 
 		} catch (Exception e) {
 
-			System.out.print("get data error!");
+			System.out.print("from search get data error!");
 			e.printStackTrace();
 			return null;
 
@@ -73,7 +71,7 @@ public class DatabaseAccount {
 	public static Account searchByName(Account account) {
 		try {
 			java.sql.Connection connect = DatabaseCommon.connect();
-			System.out.println("Success connect Mysql server!");
+			System.out.println("from searchByName Success connect Mysql server!");
 			String username = "'" + account.getUsername() + "'";
 			String email = "'" + account.getEmailaddress() + "'";
 			String Squery = "select * from Account where username = " + username + ";";
@@ -98,7 +96,7 @@ public class DatabaseAccount {
 
 		} catch (Exception e) {
 
-			System.out.print("get data error!");
+			System.out.print("from searchByName get data error!");
 			e.printStackTrace();
 			return null;
 

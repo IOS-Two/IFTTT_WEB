@@ -30,7 +30,7 @@ public class MailTrigger extends Trigger {
 	@Override
 	public boolean THIS() {
 		// TODO Auto-generated method stub
-
+		System.out.println("check mail");
 		int count = 0;
 		try {
 			count = SimpleStoreMails.count(MailId, MailPassword);

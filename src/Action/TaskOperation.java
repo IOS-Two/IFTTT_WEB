@@ -15,7 +15,11 @@ public class TaskOperation {
 	}
 	
 	public static void addTask(Task task) {
+		System.out.println("hahahahahahahahhaha");
 		taskList.add(task);
+//		Thread thread = new Thread(task);
+//		System.out.println(task.getTaskName() + " BEGIN!");
+//		thread.start();
 	}
 	
 	public static void runTask() {

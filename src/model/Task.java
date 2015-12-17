@@ -1,10 +1,16 @@
 package model;
 
+import Trigger.TimeTrigger;
 import Trigger.Trigger;
+
+import java.io.IOException;
+
+import javax.mail.MessagingException;
+
 import Action.Action;
 
-public class Task implements Runnable{
-	
+public class Task implements Runnable {
+
 	private int tid;
 	private String username;
 	private String taskName;
@@ -13,23 +19,23 @@ public class Task implements Runnable{
 	private Trigger trigger;
 	private int thistype;
 	private int thattype;
-	private String thatId;	//weiboid mailid
-	private String thatPass; //weibopassword mailpassword
-	private String thatContent; //weibocontent mailcontent
-	private String thatRec; //mailRec
-	private String thatSub; //mailSub
-	private String thisstr1; //Date  weiboid  mailid  weiboid
-	private String thisstr2; //time weibocontent mailpassword duringTime
-	
+	private String thatId; // weiboid mailid
+	private String thatPass; // weibopassword mailpassword
+	private String thatContent; // weibocontent mailcontent
+	private String thatRec; // mailRec
+	private String thatSub; // mailSub
+	private String thisstr1; // Date weiboid mailid weiboid
+	private String thisstr2; // time weibocontent mailpassword duringTime
+
 	private static final int INIT = -1;
 	private static final int RUNNING = 1;
-	private static final int FINISHED = 2;
+	private static final int STOP= 2;
 	private static final int PAUSE = 3;
-	private static final int STOPPED = 4;
-	
+
+
 	private static final int sendWeibo = 0;
 	private static final int sendMail = 1;
-	
+
 	private static final int timeTrigger = 0;
 	private static final int mailTrigger = 1;
 	private static final int weiboContentTrigger = 2;
@@ -40,17 +46,15 @@ public class Task implements Runnable{
 		this.tid = tid;
 		this.username = username;
 		this.taskName = taskname;
-		this.status = INIT;
+		this.status = RUNNING;
 	}
-	
-    public String getInfo () {
-    	String Info = "Taskname:" + taskName + "\n"
-    			+ "user:" + username + "\n"
-    			+ "status:" + status + "\n"
-    			+ trigger.getInfo() + action.getInfo();
-    	return Info;
-    }
-	
+
+	public String getInfo() {
+		String Info = "Taskname:" + taskName + "\n" + "user:" + username + "\n" + "status:" + status + "\n"
+				+ trigger.getInfo() + action.getInfo();
+		return Info;
+	}
+
 	public int getTid() {
 		return tid;
 	}
@@ -58,8 +62,6 @@ public class Task implements Runnable{
 	public void setTid(int tid) {
 		this.tid = tid;
 	}
-
-	
 
 	public String getTaskName() {
 		return taskName;
@@ -120,9 +122,23 @@ public class Task implements Runnable{
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		while(true) {
-			if (trigger.THIS())
-				action.THAT();
+		while (true) {
+			if (status == RUNNING) {
+				try {
+					if (trigger.THIS()) {
+						action.THAT();
+						if (this.trigger instanceof TimeTrigger) {
+							status = STOP;
+						}
+					}
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (MessagingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 	}
 

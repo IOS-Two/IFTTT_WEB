@@ -12,12 +12,12 @@ public class DatabaseCommon {
 			e.printStackTrace();
 		}
 		try {
-			java.sql.Connection connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/ifttt", "root",
-					"123456");
-			System.out.println("Success connect Mysql server!");
+			java.sql.Connection connect = DriverManager.getConnection("jdbc:mysql://localhost/ifttt", "root",
+					"");
+			System.out.println("from connect Success connect Mysql server!");
 			return connect;
 		} catch (Exception e) {
-			System.out.print("get data error!");
+			System.out.print("from connect get data error!");
 			e.printStackTrace();
 
 		}
