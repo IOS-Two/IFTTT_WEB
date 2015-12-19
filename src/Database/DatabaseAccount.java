@@ -8,7 +8,7 @@ public class DatabaseAccount {
 	public static void insert(Account account) {
 		try {
 			/*
-			 * TODO:useridÔÚÊı¾İ¿âÖĞĞèÓĞÒ»¸öÈ«¾Ö±äÁ¿,moneyºÍlevel³õÖµ10ºÍ1 ÕâÀïÏÈÊ¹ÓÃÒ»¸ö¹Ì¶¨ÖµÀ´Íê³É³õ²½¹¦ÄÜ
+			 * TODO:useridï¿½ï¿½ï¿½ï¿½ï¿½İ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½È«ï¿½Ö±ï¿½ï¿½ï¿½,moneyï¿½ï¿½levelï¿½ï¿½Öµ10ï¿½ï¿½1 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ì¶ï¿½Öµï¿½ï¿½ï¿½ï¿½É³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			 */
 			int userid = getUserid();
 			java.sql.Connection connect = DatabaseCommon.connect();
@@ -20,7 +20,7 @@ public class DatabaseAccount {
 
 			String r1 = "insert into Account values(" + userid + ",'" + username + "' " + "," + "'" + password + "'"
 					+ ",'" + email + "'" + ",10,1);";
-			stmt.executeUpdate("Update static set userNumber=userNumber+1,usercount=usercount+1;");
+			//stmt.executeUpdate("Update static set userNumber=userNumber+1,usercount=usercount+1;");
 			System.out.println(r1);
 			stmt.execute(r1);
 			stmt.close();
@@ -125,7 +125,7 @@ public class DatabaseAccount {
 		}
 	}
 
-	// ¸ù¾İusernameÉ¾³ıÒ»¸öÓÃ»§
+	// ï¿½ï¿½ï¿½ï¿½usernameÉ¾ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Ã»ï¿½
 	public static void deleteAccount(String username) {
 		try {
 			java.sql.Connection connect = DatabaseCommon.connect();

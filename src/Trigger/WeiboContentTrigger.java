@@ -57,9 +57,9 @@ public class WeiboContentTrigger extends Trigger {
 					JSONObject statues = (JSONObject) temp.get(i);
 					JSONObject usrid = (JSONObject) statues.get("user");
 					String tempWeiboId = new String(WeiboId.getBytes("GB2312"), "GBK");
+					System.out.println("Same Screen_name");
+					System.out.println(statues.getString("text"));
 					if (usrid.getString("screen_name").equals(WeiboId)) {
-						System.out.println("Same Screen_name");
-						System.out.println(statues.getString("text"));
 						if (statues.getString("text").indexOf(pattern) != -1) {
 							
 							if (idstr.equals(statues.getString("idstr"))) {

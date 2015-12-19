@@ -1,74 +1,34 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="model.Task, Action.TaskOperation"%>
+<%@ page
+	import="model.Task, Action.TaskOperation, Database.DatabaseTask"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<script type="text/javascript">
-	function showSelect() {
-		var obj = document.getElementById("taskname");
-		var index = obj.selectedIndex;
-		for (var i = 0; i < obj.length; i++) {
-			if (i == index) {
-				document.getElementById("" + i).style.display = "block";
-			} else
-				document.getElementById("" + i).style.display = "none";
-		}
-
-	}
-</script>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Look task list</title>
 </head>
 <body>
-	<form method="post">
-		<select id="taskname" name="taskname" onchange="showSelect()">
-			<%
-				for (int i = 0; i < TaskOperation.taskList.size(); i++) {
-			%>
-			<option value=i>
-				<%
-					out.print(TaskOperation.taskList.get(i).getTaskName());
-				%>
-			</option>
-			<%
-				}
-			%>
-		</select>
-		<%
-			for (int i = 0; i < TaskOperation.taskList.size(); i++) {
-				String temp = String.valueOf(i);
-				if (i == 0) {
-		%>
-		<div id=<%=temp%> style="display: block">
-			<p>
-				<%
-					out.println(TaskOperation.taskList.get(i).getInfo());
-				%>
-			</p>
-		</div>
-		<%
-			} else {
-		%>
-		<div id=<%=temp%> style="display: none">
-			<p>
-				<%
-					out.println(TaskOperation.taskList.get(i).getInfo());
-				%>
-			</p>
-		</div>
-		<%
+	<form action=TaskController method="post">
+	<%
+		HttpSession session2 = request.getSession();
+		String username = (String) session2.getAttribute("username");
+		out.print("<h1>"+ username + "的任务查看控制"+"</h1>");
+		for (int i = 0; i < TaskOperation.taskList.size(); i ++) {
+			if (TaskOperation.taskList.get(i).getUsername().equals(username)) {
+				Task task = TaskOperation.taskList.get(i);
+				out.print("<input type=\"radio\" value="+task.getTid() + " name=\"task\">");
+				out.print(task.getInfo()+ "<br>");
 			}
-			}
-		%>
+		}
+	%>
 		<select id="status" name="status">
 		<option value=1>开始</option>
-		<option value=2>暂停</option>
-		<option value=3>停止</option>
-		<option value=4>删除</option>
+		<option value=3>暂停</option>
+		<option value=2>停止</option>
+		<option value=100>删除</option>
 		</select>
-		<br>
-		<input type="submit" name="submit"><br>
+		<a href=''><input type='submit' value='确定'></input></a><br>
 	</form>
 </body>
 </html>

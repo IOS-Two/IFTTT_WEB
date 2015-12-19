@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page
+	import="model.Task, Action.TaskOperation, Database.DatabaseTask"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -85,7 +87,7 @@ div#button {
 }
 </style>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>TaskManangement</title>
+<title>Insert title here</title>
 </head>
 <body>
 	<div id="container">
@@ -94,7 +96,11 @@ div#button {
 				<%
 					HttpSession session1 = request.getSession();
 					String username = (String) session1.getAttribute("username");
-					out.println(username + "的任务管理");
+					out.println(username + "的任务修改");
+					int tid = Integer.parseInt(request.getParameter("tid"));
+					Task task = TaskOperation.getTask(tid);
+					int thistype = task.getThistype();
+					int thattype = task.getThattype();
 				%>
 			</h1>
 		</div>
@@ -102,13 +108,17 @@ div#button {
 			<ul>
 				<li><a href="/IFTTT/TaskManagement.jsp">新建任务</a></li>
 				<li><a href="/IFTTT/LookTaskInfo.jsp">查看任务</a></li>
-				<li><a href="/IFTTT/ChooseModifyTask.jsp">修改任务</a></li>
+				<li><a href="/IFTTT/ModifyTaskInfo.jsp">修改任务</a></li>
 			</ul>
 		</div>
 		<div id="content">
 			<form method="post" action="getTask">
 				<div id="ThisThatChoose">
-					任务名:<br> <input type="text" name="taskname" id="taskname">
+					任务名:<br>
+					<%
+						out.print(task.getTaskName());
+					%>
+					<br>
 					<h3>THIS</h3>
 					<input type="radio" value=0 checked="checked" name="this"
 						id="timeTrigger" onchange="showTimeThis()"> 定时发送<br>
@@ -122,7 +132,7 @@ div#button {
 					<input type="radio" checked="checked" name="that" id="MailAction"
 						onchange="showMailThat()" value=1> 邮件<br> <input
 						type="radio" name="that" id="WeiboAction"
-						onchange="showWeiboThat()" value=0> 微博<br>
+						onchange="showWeiboThat()" value=0> 微博<br>	·
 				</div>
 				<div id="This">
 					<h3>THIS:</h3>
@@ -160,8 +170,7 @@ div#button {
 						<br>
 					</div>
 					<div id="MailThat" style="display: block">
-						邮件用户:<br>
-						<input type="text" name="MailId" id="MailId"><br>
+						邮件用户:<br> <input type="text" name="MailId" id="MailId"><br>
 						密码：<input type="password" name="Mailpass" id="Mailpass"><br>
 						收件人：<input type="text" name="Mailrec" id="Mailrec"><br>
 						主题：<br> <input type="text" name="Mailsub" id="Mailsub"><br>

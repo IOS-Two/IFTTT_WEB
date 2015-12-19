@@ -1,6 +1,8 @@
 package Servlet;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -64,51 +66,79 @@ public class getTask extends HttpServlet {
 		int thistype = Integer.parseInt((String) request.getParameter("this"));
 		int thattype = Integer.parseInt((String) request.getParameter("that"));
 		Task task = getTaskInfo(request, thistype, thattype, username);
-		System.out.println(task.hashCode());
-		System.out.println(task.getInfo());
-		TaskOperation.addTask(task);
+		
+		String srcURL = request.getHeader("Referer");
+		String []tem = srcURL.split("[/?=]");
+		if (tem.length >= 7) {
+			int tid = Integer.parseInt(tem[tem.length - 1]);
+			task.setTid(tid);
+			task.setTaskName(TaskOperation.getTask(tid).getTaskName());
+			TaskOperation.deleteTask(tid);
+			TaskOperation.addTask(task);
+		}
+		else {
+			TaskOperation.addTask(task);
+		}
 
-		doGet(request, response);
+		//doGet(request, response);
 	}
 
-	protected Trigger getTrigger(HttpServletRequest request, int thistype) {
+	protected ArrayList<Object> getTrigger(HttpServletRequest request, int thistype) {
+		ArrayList<Object> temp = new ArrayList<Object>();
+		String thisstr1 = null;
+		String thisstr2 = null;
 		Trigger trigger = null;
 		if (thistype == 0) {
-			String Date = request.getParameter("Date");
-			String Time = request.getParameter("Time");
-			trigger = new TimeTrigger(Date, Time);
+			thisstr1 = request.getParameter("Date");
+			thisstr2 = request.getParameter("Time");
+			trigger = new TimeTrigger(thisstr1, thisstr2);
 		} else if (thistype == 1) {
-			String MailID = request.getParameter("MailId1");
-			String Mailpass = request.getParameter("MailPass1");
-			trigger = new MailTrigger(MailID, Mailpass);
+			thisstr1 = request.getParameter("MailId1");
+			thisstr2 = request.getParameter("MailPass1");
+			trigger = new MailTrigger(thisstr1, thisstr2);
 		} else if (thistype == 2) {
-			String WeiboId = request.getParameter("WeiboId1");
-			String WeiboPattern = request.getParameter("weiboPattern");
-			trigger = new WeiboContentTrigger(WeiboId, WeiboPattern);
+			thisstr1 = request.getParameter("WeiboId1");
+			thisstr2 = request.getParameter("weiboPattern");
+			trigger = new WeiboContentTrigger(thisstr1, thisstr2);
 		} else {
-			String WeiboId = request.getParameter("WeiboId2");
-			String during = request.getParameter("during");
-			trigger = new WeiboTimeTrigger(WeiboId, during);
+			thisstr1 = request.getParameter("WeiboId2");
+			thisstr2 = request.getParameter("during");
+			trigger = new WeiboTimeTrigger(thisstr1, thisstr2);
 		}
-		return trigger;
+		temp.add(trigger);
+		temp.add(thisstr1);
+		temp.add(thisstr2);
+		return temp;
 	}
 
-	protected Action getAction(HttpServletRequest request, int thattype) {
+	protected ArrayList<Object> getAction(HttpServletRequest request, int thattype) {
+		ArrayList<Object> temp = new ArrayList<Object>();
 		Action action = null;
+		String thatId; 
+		String thatPass; 
+		String thatContent; 
+	    String thatRec = null; 
+		String thatSub = null; 
 		if (thattype == 0) {
-			String WeiboID = request.getParameter("weiboid");
-			String weibopassword = request.getParameter("weibopassword");
-			String weiboContent = request.getParameter("weibocontent");
-			action = new WeiboAction(WeiboID, weibopassword, weiboContent);
+			thatId = request.getParameter("weiboid");
+			thatPass = request.getParameter("weibopassword");
+			thatContent = request.getParameter("weibocontent");
+			action = new WeiboAction(thatId, thatPass, thatContent);
 		} else {
-			String MailId = request.getParameter("MailId");
-			String MailPass = request.getParameter("Mailpass");
-			String MailRec = request.getParameter("Mailrec");
-			String Mailsub = request.getParameter("Mailsub");
-			String MailContent = request.getParameter("Mailcontent");
-			action = new MailAction(MailId, MailPass, MailRec, MailContent, Mailsub);
+			thatId = request.getParameter("MailId");
+			thatPass = request.getParameter("Mailpass");
+			thatRec = request.getParameter("Mailrec");
+			thatSub = request.getParameter("Mailsub");
+			thatContent = request.getParameter("Mailcontent");
+			action = new MailAction(thatId, thatPass, thatRec, thatContent, thatSub);
 		}
-		return action;
+		temp.add(action);
+		temp.add(thatId);
+		temp.add(thatPass);
+		temp.add(thatContent);
+		temp.add(thatRec);
+		temp.add(thatSub);
+		return temp;
 	}
 
 	protected Task getTaskInfo(HttpServletRequest request, int thistype, int thattype, String username) {
@@ -116,8 +146,17 @@ public class getTask extends HttpServlet {
 		Task task = new Task(0, username, taskName);
 		task.setThistype(thistype);
 		task.setThattype(thattype);
-		task.setAction(getAction(request, thattype));
-		task.setTrigger(getTrigger(request, thistype));
+		Action action = (Action) getAction(request, thattype).get(0);
+		task.setThatId((String)getAction(request, thattype).get(1));
+		task.setThatPass((String)getAction(request, thattype).get(2));
+		task.setThatContent((String)getAction(request, thattype).get(3));
+		task.setThatRec((String)getAction(request, thattype).get(4));
+		task.setThatSub((String)getAction(request, thattype).get(5));
+		Trigger trigger = (Trigger) getTrigger(request, thistype).get(0);
+		task.setThisstr1((String)getTrigger(request, thistype).get(1));
+		task.setThisstr2((String)getTrigger(request, thistype).get(2));
+		task.setAction(action);
+		task.setTrigger(trigger);
 		task.setTid(task.hashCode());
 		return task;
 	}

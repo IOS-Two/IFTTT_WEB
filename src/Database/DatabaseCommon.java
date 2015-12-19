@@ -13,7 +13,7 @@ public class DatabaseCommon {
 		}
 		try {
 			java.sql.Connection connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/ifttt", "root",
-					"123456");
+					"");
 			System.out.println("Success connect Mysql server!");
 			return connect;
 		} catch (Exception e) {

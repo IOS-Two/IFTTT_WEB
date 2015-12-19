@@ -26,7 +26,7 @@ public class DatabaseTask {
 		}
 	}
 
-	// ¸ù¾Ý´«ÈëµÄtidºÍstatus¸Ä±äÄ³Ò»ÈÎÎñµÄ×´Ì¬
+	// ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ï¿½ï¿½tidï¿½ï¿½statusï¿½Ä±ï¿½Ä³Ò»ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬
 	public static void changeTaskStatus(int tid, int status) {
 		try {
 			java.sql.Connection connect = DatabaseCommon.connect();
@@ -42,7 +42,7 @@ public class DatabaseTask {
 		}
 	}
 
-	// ¸ù¾Ý´«ÈëµÄusername·µ»Ø¶ÔÓ¦µÄtidÊý×é
+	// ï¿½ï¿½ï¿½Ý´ï¿½ï¿½ï¿½ï¿½usernameï¿½ï¿½ï¿½Ø¶ï¿½Ó¦ï¿½ï¿½tidï¿½ï¿½ï¿½ï¿½
 	public static int[] getTaskOfUserid(String username) {
 		try {
 			java.sql.Connection connect = DatabaseCommon.connect();
@@ -54,6 +54,7 @@ public class DatabaseTask {
 			int i = 0;
 			while (rs.next()) {
 				a[i] = rs.getInt("tid");
+				i ++;
 			}
 			pstmt.close();
 			connect.close();
@@ -64,8 +65,8 @@ public class DatabaseTask {
 			return null;
 		}
 	}
-
-	// ¸ù¾Ýtaskid ·µ»ØÒ»¸ötask,¶¼ÊÇpause×´Ì¬
+	
+	
 	public static Task getTask(int taskid) {
 		try {
 			java.sql.Connection connect = DatabaseCommon.connect();
@@ -74,10 +75,11 @@ public class DatabaseTask {
 			pstmt = (PreparedStatement) connect.prepareStatement(sql);
 			ResultSet rs = pstmt.executeQuery();
 			rs.next();
-			Task task = new Task(rs.getInt("tid"), rs.getString("username"), rs.getString("taskname"), 3,
+			Task task = new Task(rs.getInt("tid"), rs.getString("username"), rs.getString("taskname"), rs.getInt("status"),
 					rs.getInt("thistype"), rs.getInt("thattype"), rs.getString("thatid"), rs.getString("thatpassword"),
 					rs.getString("thatContent"), rs.getString("thatRec"), rs.getString("thatsub"),
 					rs.getString("thisstr1"), rs.getString("thisstr2"));
+			System.out.println(task.getInfo());
 			pstmt.close();
 			connect.close();
 			return task;
@@ -88,7 +90,7 @@ public class DatabaseTask {
 		}
 	}
 
-	// ¸ù¾ÝtidÉ¾³ýTask
+	
 	public static void deleteTask(int tid) {
 		try {
 			java.sql.Connection connect = DatabaseCommon.connect();

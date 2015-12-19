@@ -8,6 +8,7 @@ import java.io.IOException;
 import javax.mail.MessagingException;
 
 import Action.Action;
+import Database.DatabaseTask;
 
 public class Task implements Runnable {
 
@@ -101,8 +102,8 @@ public class Task implements Runnable {
 		this.tid = tid;
 		this.username = username;
 		this.taskName = taskname;
-		/*The status should be INIT?*/
-		this.status = RUNNING;
+		/*The status should be INIT?*/ /*ok */
+		this.status = INIT;
 	}
 
 	public Task(int tid, String username, String taskName, int status, int thistype, int thattype, String thatId,
@@ -124,8 +125,9 @@ public class Task implements Runnable {
 	}
 
 	public String getInfo() {
-		String Info = "Taskname:" + taskName + "\n" + "user:" + username + "\n" + "status:" + status + "\n"
-				+ trigger.getInfo() + action.getInfo();
+		String Info = "Taskname:" + taskName + "\n" + "user:" + username + 
+				"\n" + "status:" + status + "\n";
+//				+ trigger.getInfo() + action.getInfo();
 		return Info;
 	}
 
@@ -198,11 +200,13 @@ public class Task implements Runnable {
 		// TODO Auto-generated method stub
 		while (true) {
 			if (status == RUNNING) {
+				System.out.println("RUNNING!");
 				try {
 					if (trigger.THIS()) {
 						action.THAT();
 						if (this.trigger instanceof TimeTrigger) {
 							status = STOP;
+							DatabaseTask.changeTaskStatus(tid, STOP);
 						}
 					}
 				} catch (MessagingException e) {

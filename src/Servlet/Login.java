@@ -8,9 +8,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-
+import Action.TaskOperation;
 import Database.DatabaseAccount;
+import Database.DatabaseTask;
 import model.Account;
+import model.Task;
 
 /**
  * Servlet implementation class Login
@@ -40,14 +42,23 @@ public class Login extends HttpServlet {
 		session.setAttribute("username", username);
 		session.setAttribute("password", password);
 		System.out.println(username+" "+password);
-		/*
-		 * TODO:这里的account应该与数据库建立联系
-		 * 没有将邮箱地址传入此时的account
-		 * 实现方法有待讨论
-		 */
+		
 		Account account = new Account(username, password,"");
 		if (DatabaseAccount.search(account) != null) {
-			response.sendRedirect("/IFTTT/PersonalHome.jsp");;
+			response.sendRedirect("/IFTTT/PersonalHome.jsp");
+			int[] tid = DatabaseTask.getTaskOfUserid(username);
+			for(int i = 0; i < tid.length; i ++) {
+				if (tid[i] != 0) {
+					Task task = DatabaseTask.getTask(tid[i]);
+					task = TaskOperation.newTaskActionTrigger(task);
+					if (TaskOperation.getTask(tid[i]) == null) {
+						TaskOperation.taskList.add(task);
+						Thread thread = new Thread(task);
+						System.out.println(task.getTaskName() + " ADD!");
+						thread.start();
+					}
+				}
+			}
 		} else
 			response.getWriter().append("Login failed!");
 	}
